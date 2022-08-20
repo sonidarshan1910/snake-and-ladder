@@ -1,0 +1,201 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+	int rd()
+	{
+		int rem;
+		A:rem=rand()%7;
+
+		if(rem==0)
+			goto A;
+		else
+			return rem;
+	}
+	void displaychart(int curp,char player[4])
+	{
+		int i,j,t,c,sft=0;
+		int diceres,pos1,pos2;
+
+		diceres,pos1,pos2;
+
+		if(curp==100)
+		{
+			printf("player %s wins\n",player);
+			scanf("% *s");
+			exit(0);
+		}
+
+		for(i=10;i>0;i--)
+		{
+			t=i-1;
+			if((sft%2)==0)
+			{
+				c=0;
+				for(j=10;j>1;j--)
+				{
+					diceres=(i*j)+(t*c++);
+
+					if(curp==diceres)
+						printf("%s\t",player);
+					else
+					printf("%d\t",diceres);
+				}
+				sft++;
+			}
+			else
+			{
+				c=9;
+				for(j=1;j<=10;j++)
+				{
+					diceres=(i*j)+(t*c--);
+
+					if(curp==diceres)
+						printf("%s\t",player);
+					else
+						printf("%d\t",diceres);
+				}
+				sft++;
+			}
+			printf("\n\n");
+
+		}
+
+		printf("\n");
+
+	}
+	int main()
+	{
+		int i,dice;
+		int cur_pos1=0;
+		int cur_pos2=0;
+		char ch;
+		clrscr();
+
+		while(1)
+		{
+			printf("Snakes:| 25 to 9 | 65 to 40 | 99 to 1 |\nladder:| 13 to 42 | 60 to 83| 70 to 93 |\n\n");
+			printf("Choose any option\n");
+			printf("[1]player 1 plays\n");
+			printf("[2]player 2 plays\n");
+			printf("[3]exit\n");
+			scanf("%s",&ch);
+
+			switch(ch)
+			{
+				case '1':dice=rd();
+				system("cls");
+
+				printf("\n");
+				printf("\t\t\t   Snakes and Ladders\n");
+				printf("\n");
+					cur_pos1=dice+cur_pos1;
+					if(cur_pos1<101)
+					{
+
+						if(cur_pos1==99)
+						{
+							displaychart(1,"-P1-");
+						}
+						if(cur_pos1==65)
+						{
+							displaychart(40,"-P1-");
+						}
+						if(cur_pos1==25)
+						{
+							displaychart(9,"-P1-");
+						}
+						if(cur_pos1==70)
+						{
+							displaychart(93,"-P1-");
+						}
+						if(cur_pos1==60)
+						{
+							displaychart(83,"-P1-");
+						}
+						if(cur_pos1==13)
+						{
+							displaychart(42,"-P1-");
+						}
+						else
+						{
+							displaychart(cur_pos1,"-P1-");
+						}
+
+						printf("\t\t\t  dice = %d\n",dice);
+						printf("\n\n");
+
+					}
+					else
+					{
+						cur_pos1=cur_pos1-dice;
+						printf("range exceeded of player 1.\n");
+						displaychart(cur_pos1,"-P1-");
+					}
+					printf("Player 2 position is %d\n\n",cur_pos2);
+
+					break;
+
+
+				case'2':dice=rd();
+				system("cls");
+
+				printf("\n");
+				printf("\t\t\t   Snakes and Ladders\n");
+				printf("\n");
+					cur_pos2=dice+cur_pos2;
+
+					if(cur_pos2<101)
+					{
+						if(cur_pos2==99)
+						{
+							displaychart(1,"-P2-");
+						}
+						if(cur_pos2==65)
+						{
+							displaychart(40,"-P2-");
+						}
+						if(cur_pos2==25)
+						{
+							displaychart(9,"-P2-");
+						}
+						if(cur_pos2==70)
+						{
+							displaychart(93,"-P2-");
+						}
+						if(cur_pos2==60)
+						{
+							displaychart(83,"-P2-");
+						}
+						if(cur_pos2==13)
+						{
+							displaychart(42,"-P2-");
+						}
+						else
+						{
+							displaychart(cur_pos2,"-P2-");
+						}
+						printf("\t\t\tdice = %d\n",dice);
+						printf("\n\n");
+					}
+					else
+					{
+						cur_pos2=cur_pos2-dice;
+						printf("range exceeded of player 2.\n");
+						displaychart(cur_pos2,"-P2-");
+					}
+					printf("player 1 position is %d\n\n",cur_pos1);
+
+					break;
+
+				case '3':exit(0);
+					break;
+
+					default:
+					printf("Incorrect choice\n");
+
+			}
+
+		}
+		       return 0;
+	}
